@@ -1,10 +1,12 @@
 import React from "react";
 import styled from "styled-components";
+import PostModal from "./PostModal";
 
 const Main = (porps) => {
   return (
     <Container>
       <ShareBox>
+        share
         <div>
           <img src="/images/user.svg" />
           <button>Start a post</button>
@@ -77,6 +79,7 @@ const Main = (porps) => {
             </button>
           </SocialAction>
         </Article>
+        <PostModal />
       </Content>
     </Container>
   );

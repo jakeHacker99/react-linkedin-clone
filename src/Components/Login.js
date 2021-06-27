@@ -1,11 +1,13 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { signInApi } from "../actions";
 
 const Login = (props) => {
   return (
     <Container>
+      {props.user && <Redirect to="/home" />}
       <Nav>
         <a href="/">
           <img src="./images/login-logo.svg" alt="" />
@@ -180,8 +182,11 @@ const Google = styled.button`
 `;
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    user: state.userState.user,
+  };
 };
+
 const mapDispatchToProps = (dispatch) => ({
   signIn: () => dispatch(signInApi()),
 });

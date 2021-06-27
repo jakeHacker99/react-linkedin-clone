@@ -5,41 +5,61 @@ import styled from "styled-components";
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
 
+  const reset = (e) => {
+    setEditorText("");
+    props.handleClick(e);
+  };
   return (
-    <Container>
-      <Content>
-        <Header>
-          <h2>Create a post</h2>
-          <button>
-            <img src="/images/close-icon.svg" alt="cl" />
-          </button>
-        </Header>
+    <>
+      {props.showModal === "open" && (
+        <Container>
+          <Content>
+            <Header>
+              <h2>Create a post</h2>
+              <button
+                onClick={(e) => {
+                  reset(e);
+                }}
+              >
+                <img src="/images/close-icon.svg" alt="cl" />
+              </button>
+            </Header>
 
-        <SharedContent>
-          <UserInfo>
-            <img src="/images/user.svg" alt=""></img>
-            <span>Name</span>
-          </UserInfo>
-        </SharedContent>
-        <SharedCreation>
-          <AttachAssets>
-            <AssetsButton>
-              <img src="/images/photo-icon.svg" alt=""></img>
-            </AssetsButton>
-            <AssetsButton>
-              <img src="/images/video-icon.svg" alt=""></img>
-            </AssetsButton>
-          </AttachAssets>
-          <ShareComment>
-            <AssetsButton>
-              <img src="/images/nav-messaging.svg" alt="" />
-              anyone
-            </AssetsButton>
-          </ShareComment>
-          <PostButton>Post</PostButton>
-        </SharedCreation>
-      </Content>
-    </Container>
+            <SharedContent>
+              <UserInfo>
+                <img src="/images/user.svg" alt=""></img>
+                <span>Name</span>
+              </UserInfo>
+              <Editor>
+                <textarea
+                  value={editorText}
+                  onChange={(e) => setEditorText(e.target.value)}
+                  placeholder="What do you wawnt to talk about?"
+                  autoFocus={true}
+                ></textarea>
+              </Editor>
+            </SharedContent>
+            <SharedCreation>
+              <AttachAssets>
+                <AssetsButton>
+                  <img src="/images/photo-icon.svg" alt=""></img>
+                </AssetsButton>
+                <AssetsButton>
+                  <img src="/images/video-icon.svg" alt=""></img>
+                </AssetsButton>
+              </AttachAssets>
+              <ShareComment>
+                <AssetsButton>
+                  <img src="/images/nav-messaging.svg" alt="" />
+                  anyone
+                </AssetsButton>
+              </ShareComment>
+              <PostButton>Post</PostButton>
+            </SharedCreation>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 };
 
@@ -163,6 +183,21 @@ const PostButton = styled.button`
   color: white;
   &:hover {
     background: #004182;
+  }
+`;
+const Editor = styled.div`
+  padding: 12px 24px;
+  textarea {
+    width: 100%;
+    min-height: 100px;
+    resize: none;
+  }
+
+  input {
+    width: 100%;
+    height: 35px;
+    font-size: 16px;
+    margin-bottom: 20px;
   }
 `;
 

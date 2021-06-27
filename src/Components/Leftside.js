@@ -31,6 +31,23 @@ const Leftside = (props) => {
           </span>
         </Item>
       </ArtCard>
+
+      <CommunityCard>
+        <a href="/">
+          <span>Groups</span>
+        </a>
+        <a href="/">
+          <span>
+            <img src="/images/plus-icon.svg" alt="+" />
+          </span>
+        </a>
+        <a href="/">
+          <span>Follow Hashtafs</span>
+        </a>
+        <a href="/">
+          <span>Discover More</span>
+        </a>
+      </CommunityCard>
     </Container>
   );
 };
@@ -178,4 +195,5 @@ const CommunityCard = styled(ArtCard)`
     }
   }
 `;
+
 export default Leftside;

@@ -1,4 +1,4 @@
-import { auth, provider } from "../firebase";
+import db, { auth, provider, storage } from "../firebase";
 import { SET_USER } from "./actionTypes";
 
 export const setUser = (payload) => ({
@@ -38,5 +38,54 @@ export function getUserAuth() {
         dispatch(setUser(user));
       }
     });
+  };
+}
+export function postArticleAPI(payload) {
+  return (dispatch) => {
+    if (payload.image != "") {
+      const upload = storage
+        .ref("image/${payload.image.name}")
+        .put(payload.image);
+      upload.on(
+        "state_Changed",
+        (snapshot) => {
+          const progress =
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+          console.log(`Progress: ${progress}%`);
+          if (snapshot.state === "RUNNING") {
+            console.log(`Progress: ${progress}%`);
+          }
+        },
+        (error) => console.log(error.code),
+        async () => {
+          const downloadURL = await upload.snapshot.ref.getDownloadURL();
+          db.collection("articles").add({
+            actor: {
+              description: payload.user.email,
+              title: payload.user.displayName,
+              date: payload.timestamp,
+              image: payload.user.photoURL,
+            },
+            video: payload.video,
+            sharedImg: downloadURL,
+            comment: "99+",
+            description: payload.description,
+          });
+        }
+      );
+    } else if (payload.video) {
+      db.collection("articles").add({
+        actor: {
+          description: payload.user.email,
+          title: payload.user.displayName,
+          date: payload.timestamp,
+          image: payload.user.photoURL,
+        },
+        video: payload.video,
+        sharedImg: "",
+        comments: "99+",
+        description: payload.description,
+      });
+    }
   };
 }

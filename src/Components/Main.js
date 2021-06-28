@@ -1,10 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
 import styled from "styled-components";
+import { getArticlesAPI } from "../actions";
 import PostModal from "./PostModal";
 
 const Main = (props) => {
+  useEffect(() => {
+    props.getarticles();
+  }, []);
+
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = (e) => {
@@ -286,6 +291,8 @@ const mapeStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  getarticles: () => dispatch(getArticlesAPI()),
+});
 
 export default connect(mapeStateToProps, mapDispatchToProps)(Main);

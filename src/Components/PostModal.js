@@ -51,8 +51,14 @@ const PostModal = (props) => {
 
             <SharedContent>
               <UserInfo>
-                <img src="/images/user.svg" alt=""></img>
-                <span>Name</span>
+                {props.user.photoURL ? (
+                  <>
+                    <img src={props.user.photoURL} />
+                    <span>{props.user.displayName}</span>
+                  </>
+                ) : (
+                  <img src="images/user.svg" />
+                )}
               </UserInfo>
               <Editor>
                 <textarea
@@ -268,7 +274,11 @@ const UploadImage = styled.div`
   }
 `;
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => {
+  return {
+    user: state.userState.user,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({});
 

@@ -4,6 +4,18 @@ import styled from "styled-components";
 
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
+  const [shareImage, setShareImage] = useState("");
+
+  const handleChange = (e) => {
+    const image = e.target.files[0];
+
+    if (image === " || image === undefined") {
+      alert(`not an image, the fils is a ${typeof image}`);
+      return;
+    }
+
+    setShareImage(image);
+  };
 
   const reset = (e) => {
     setEditorText("");
@@ -36,7 +48,10 @@ const PostModal = (props) => {
                   onChange={(e) => setEditorText(e.target.value)}
                   placeholder="What do you wawnt to talk about?"
                   autoFocus={true}
-                ></textarea>
+                />
+                <UploadImage>
+                  <input type="file" />
+                </UploadImage>
               </Editor>
             </SharedContent>
             <SharedCreation>
@@ -54,7 +69,9 @@ const PostModal = (props) => {
                   anyone
                 </AssetsButton>
               </ShareComment>
-              <PostButton>Post</PostButton>
+              <PostButton disabled={!editorText ? true : false}>
+                Post
+              </PostButton>
             </SharedCreation>
           </Content>
         </Container>
@@ -71,6 +88,7 @@ const Container = styled.div`
   bottom: 0;
   z-index: 9999;
   background-color: rgba(0, 0, 0, 0.8);
+  animation: fadeIn 0.3s;
 `;
 
 const Content = styled.div`
@@ -179,10 +197,10 @@ const PostButton = styled.button`
   border-radius: 20px;
   padding-left: 16px;
   padding-right: 16px;
-  background: #0a66c2;
-  color: white;
+  background: ${(props) => (props.disabled ? "rgba(0,0,0, 0.8)" : "#0a66c2")};
+  color: ${(props) => (props.disabled ? "rgba(1,1,1,0.2)" : "white")};
   &:hover {
-    background: #004182;
+    background: ${(props) => (props.disabled ? "rgba(0,0,0,0.08)" : "#004182")};
   }
 `;
 const Editor = styled.div`
@@ -200,5 +218,7 @@ const Editor = styled.div`
     margin-bottom: 20px;
   }
 `;
+
+const UploadImage = styled.div``;
 
 export default PostModal;

@@ -44,6 +44,7 @@ const Main = (props) => {
             <button
               onClick={handleClick}
               disabled={props.loading ? true : false}
+              style={{ cursor: "pointer" }}
             >
               Start a post
             </button>
@@ -83,11 +84,28 @@ const Main = (props) => {
                 <img src="/images/ellipsis.svg" alt="" />
               </button>
             </SharedActor>
+            <Description>jag springer här</Description>
+            <SharedImg>
+              <a>
+                <img src="/images/shared-img.jpg" />
+              </a>
+            </SharedImg>
+            <SocialCount>
+              <li>
+                <button>
+                  <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" />
+                  <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" />
+                  <span>75</span>
+                </button>
+              </li>
+              <li>
+                <a>32 comments</a>
+              </li>
+            </SocialCount>
           </Article>
         </Content>
         <PostModal showModal={showModal} handleClick={handleClick} />
       </Container>
-      )}
     </>
   );
 };
@@ -288,6 +306,7 @@ const mapeStateToProps = (state) => {
   return {
     loading: state.articleState.loading,
     user: state.userState.user,
+    articles: state.articleState.articles,
   };
 };
 

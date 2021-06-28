@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ReactPlayer from "react-player";
+import { connect } from "react-redux";
 import styled from "styled-components";
 import PostModal from "./PostModal";
 
-const Main = (porps) => {
+const Main = (props) => {
   const [showModal, setShowModal] = useState(false);
 
   const handleClick = (e) => {
@@ -25,86 +27,63 @@ const Main = (porps) => {
     }
   };
   return (
-    <Container>
-      <ShareBox>
-        share
-        <div>
-          <img src="/images/user.svg" />
-          <button onClick={handleClick} style={{ cursor: "pointer" }}>
-            Start a post
-          </button>
-        </div>
-        <div>
-          <button>
-            <img src="/images/photo-icon.svg" />
-            <span>Photo</span>
-          </button>
-          <button>
-            <img src="/images/video-icon.svg" />
-            <span>Video</span>
-          </button>
-          <button>
-            <img src="/images/event-icon.svg" />
-            <span>Event</span>
-          </button>
-          <button>
-            <img src="/images/article-icon.svg" />
-            <span>write article</span>
-          </button>
-        </div>
-      </ShareBox>
-      <Content>
-        <Article>
-          <SharedActor>
-            <a>
-              <div>
-                <span></span>
-              </div>
-            </a>
-            <button>
-              <img src="/images/elipses.svg" />
+    <>
+      <Container>
+        <ShareBox>
+          <div>
+            {props.user && props.user.photoURL ? (
+              <img src={props.user.photoURL} />
+            ) : (
+              <img src="/images/user.svg" alt="" />
+            )}
+            <button
+              onClick={handleClick}
+              disabled={props.loading ? true : false}
+            >
+              Start a post
             </button>
-          </SharedActor>
-          <Description>jag springer här</Description>
-          <SharedImg>
-            <a>
-              <img src="/images/shared-img.jpg" />
-            </a>
-          </SharedImg>
-          <SocialCount>
-            <li>
+          </div>
+
+          <div>
+            <button>
+              <img onClick={handleClick} src="/images/photo-icon.svg" alt="" />
+              <span>photo</span>
+            </button>
+
+            <button>
+              <img onClick={handleClick} src="/images/video-icon.svg" alt="" />
+              <span>Video</span>
+            </button>
+
+            <button>
+              <img onClick={handleClick} src="/images/event-icon.svg" alt="" />
+              <span>Event</span>
+            </button>
+
+            <button>
+              <img
+                onClick={handleClick}
+                src="/images/article-icon.svg"
+                alt=""
+              />
+              <span>Write article</span>
+            </button>
+          </div>
+        </ShareBox>
+        <Content>
+          {props.loading && <img src="./images/spin-logo.gif" />}
+          <Article>
+            <SharedActor>
               <button>
-                <img src="https://static-exp1.licdn.com/sc/h/d310t2g24pvdy4pt1jkedo4yb" />
-                <img src="https://static-exp1.licdn.com/sc/h/5thsbmikm6a8uov24ygwd914f" />
-                <span>75</span>
+                <img src="/images/ellipsis.svg" alt="" />
               </button>
-            </li>
-            <li>
-              <a>32 comments</a>
-            </li>
-          </SocialCount>
-          <SocialAction>
-            <button>
-              <img src="/images/like-icon.svg" />
-              <span>Like</span>
-            </button>
-            <button>
-              <img src="/images/comment-icon.svg" />
-              <span>Comment</span>
-            </button>
-            <button>
-              <img src="/images/share-icon.svg" />
-              <span>Share</span>
-            </button>
-            <button>
-              <img src="/images/send-icon.svg" />
-              <span>Send</span>
-            </button>
-          </SocialAction>
-        </Article>
+            </SharedActor>
+          </Article>
+        </Content>
         <PostModal showModal={showModal} handleClick={handleClick} />
-      </Content>
-    </Container>
+      </Container>
+      )}
+    </>
   );
 };
 
@@ -300,4 +279,13 @@ const Content = styled.div`
   }
 `;
 
-export default Main;
+const mapeStateToProps = (state) => {
+  return {
+    loading: state.articleState.loading,
+    user: state.userState.user,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({});
+
+export default connect(mapeStateToProps, mapDispatchToProps)(Main);

@@ -30,7 +30,9 @@ const Main = (porps) => {
         share
         <div>
           <img src="/images/user.svg" />
-          <button onClick={handleClick}>Start a post</button>
+          <button onClick={handleClick} style={{ cursor: "pointer" }}>
+            Start a post
+          </button>
         </div>
         <div>
           <button>

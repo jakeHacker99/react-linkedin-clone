@@ -15,7 +15,7 @@ const Rightside = (props) => {
               <Avatar></Avatar>
             </a>
             <div>
-              <span>#Linkedin</span>
+              <span>#Typescript</span>
               <button>Follow</button>
             </div>
           </li>
@@ -24,7 +24,7 @@ const Rightside = (props) => {
               <Avatar></Avatar>
             </a>
             <div>
-              <span>#Video</span>
+              <span>#Redux</span>
               <button>Follow</button>
             </div>
           </li>

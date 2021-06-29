@@ -11,6 +11,18 @@ const PostModal = (props) => {
   const [shareImage, setShareImage] = useState("");
   const [videoLink, setVideoLink] = useState("");
   const [assetArea, setAssetArea] = useState("");
+
+  const labelStyling = {
+    color: "#B4886B",
+    display: "block",
+    width: "200",
+    float: "left",
+    border: "3px solid #000",
+    borderRadius: "5px",
+    background: "#000",
+    cursor: "pointer",
+  };
+
   const handleChange = (e) => {
     const image = e.target.files[0];
 
@@ -96,7 +108,9 @@ const PostModal = (props) => {
                     />
 
                     <p>
-                      <label htmlFor="file">Select an image to share</label>
+                      <label htmlFor="file" style={labelStyling}>
+                        Välj en fil
+                      </label>
                     </p>
                     {shareImage && (
                       <img src={URL.createObjectURL(shareImage)} />
@@ -137,6 +151,7 @@ const PostModal = (props) => {
               <PostButton
                 disabled={!editorText ? true : false}
                 onClick={(e) => postArticle(e)}
+                style={{ transitionDuration: "156" }}
               >
                 Post
               </PostButton>
@@ -267,6 +282,7 @@ const PostButton = styled.button`
   padding-right: 16px;
   background: ${(props) => (props.disabled ? "rgba(0,0,0, 0.8)" : "#0a66c2")};
   color: ${(props) => (props.disabled ? "rgba(1,1,1,0.2)" : "white")};
+  transition-duration: 357ms;
   &:hover {
     background: ${(props) => (props.disabled ? "rgba(0,0,0,0.08)" : "#004182")};
   }
@@ -291,6 +307,13 @@ const UploadImage = styled.div`
   text-align: center;
   img {
     width: 100%;
+  }
+`;
+
+const label = styled.p`
+  :hover {
+    color: "#000";
+    background-color: #fff;
   }
 `;
 

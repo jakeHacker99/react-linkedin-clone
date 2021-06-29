@@ -34,9 +34,8 @@
 Modules:  {
 
 ```
-redux-thunk,
+redux-thunk
 react-player
-
 ```
 #
 

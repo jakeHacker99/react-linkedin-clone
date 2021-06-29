@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import styled from "styled-components";
-import { signOutApi } from "../actions";
+import { signOutAPI } from "../actions";
 
 const Header = (props) => {
   return (
@@ -266,7 +266,7 @@ const mapeStateToProps = (state) => {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  signOut: () => dispatch(signOutApi()),
+  signOut: () => dispatch(signOutAPI()),
 });
 
 export default connect(mapeStateToProps, mapDispatchToProps)(Header);

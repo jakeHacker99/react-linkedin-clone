@@ -64,7 +64,7 @@ export function postArticleAPI(payload) {
             (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
           console.log("Progress: " + { progress } + "%");
           if (snapshot.state === "RUNNING") {
-            console.log("Progress: ${progress}%");
+            console.log("Progress: " + { progress } + "%");
           }
         },
         (error) => console.log(error.code),
@@ -79,7 +79,8 @@ export function postArticleAPI(payload) {
             },
             video: payload.video,
             sharedImage: downloadURL,
-            comments: 0,
+            comments: "99+",
+
             description: payload.description,
           });
           dispatch(setLoading(false));
@@ -95,7 +96,8 @@ export function postArticleAPI(payload) {
         },
         video: payload.video,
         sharedImage: "",
-        comments: 0,
+        comments: "99+",
+
         description: payload.description,
       });
       dispatch(setLoading(false));
@@ -109,7 +111,7 @@ export function postArticleAPI(payload) {
         },
         video: "",
         sharedImage: "",
-        comments: 0,
+        comments: "99+",
         description: payload.description,
       });
       dispatch(setLoading(false));

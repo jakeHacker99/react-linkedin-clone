@@ -112,7 +112,7 @@ const Main = (props) => {
                         <img src="/images/like-icon.svg" alt="" />
                         <img src="/images/clapping-icon.svg" alt="" />
 
-                        <span>75</span>
+                        <span>99+</span>
                       </button>
                     </li>
                     <li>

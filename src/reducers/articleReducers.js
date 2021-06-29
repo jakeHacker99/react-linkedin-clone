@@ -12,7 +12,7 @@ const articleReducer = (state = intiState, action) => {
         ...state,
         loading: action.status,
       };
-    case "GET_ARTICLES":
+    case GET_ARTICLES:
       return {
         ...state,
         articles: action.payload,

@@ -169,7 +169,6 @@ const CommonCard = styled.div`
 `;
 
 const ShareBox = styled(CommonCard)`
-  /* MY EXTRA BITS - He didn't provide images, so I had to grab them myself and change the svg colours */
   div {
     button:nth-child(1) {
       img {
